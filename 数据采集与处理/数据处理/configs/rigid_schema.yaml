@@ -1,0 +1,38 @@
+{
+  "format": {
+    "delimiter": "comma",
+    "has_header": false
+  },
+  "columns": {
+    "rb1_id": 0,
+    "rb1_pos": [
+      1,
+      2,
+      3
+    ],
+    "rb1_quat": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "rb2_id": 8,
+    "rb2_pos": [
+      9,
+      10,
+      11
+    ],
+    "rb2_quat": [
+      12,
+      13,
+      14,
+      15
+    ],
+    "sensors": [
+      16,
+      17,
+      18,
+      19
+    ]
+  }
+}

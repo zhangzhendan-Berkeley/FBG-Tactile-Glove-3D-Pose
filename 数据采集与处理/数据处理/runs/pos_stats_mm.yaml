@@ -1,0 +1,10 @@
+tip_pos_mm_mean:
+- -186.93923729744512
+- 842.7974401059358
+- 950.9911266197905
+tip_pos_mm_std:
+- 29.0379774118939
+- 27.61928698353193
+- 33.671392772414
+count: 33120
+note: Statistics computed in WORLD frame (yzx), unit mm, from training files.

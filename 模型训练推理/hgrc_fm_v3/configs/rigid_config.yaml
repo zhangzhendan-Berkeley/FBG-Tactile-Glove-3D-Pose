@@ -1,0 +1,93 @@
+seed: 0
+device: auto
+
+data:
+
+  train_files:
+    - {file: data/train.csv, subject_id: 0}
+
+  val_files:
+    - {file: data/val.csv, subject_id: 0}
+
+  test_files:
+    - {file: data/test.csv, subject_id: 0}
+
+  schema_file: null
+
+  pos_unit: mm
+
+  stats_path: runs/pos_stats_mm.yaml
+
+  # 滑窗
+  window_size: 96
+  window_stride: 1
+
+  # 传感器缩放
+  sensor_scale: 1.0
+
+  # 监督方式
+  supervision: world
+  ref_frame: last
+
+  augment:
+    enable: true
+    sensor_noise_std: 0.02
+    sensor_mask_prob: 0.05
+    sensor_mask_mode: zero
+    back_pos_jitter_mm: 2.0
+    back_rot_jitter_deg: 1.0
+
+
+model:
+  enc_type: mamba
+
+  seq_hidden: 384
+  seq_layers: 6
+  pooling: mean
+
+  mamba_d_state: 32
+  mamba_d_conv: 4
+  mamba_expand: 3
+  mamba_dropout: 0.03
+
+  head_hidden: 768
+  head_depth: 6
+  head_act: silu
+
+  flow_width: 512
+  flow_depth: 6
+  flow_tfeat: 16
+  flow_act: silu
+
+
+train:
+  batch_size: 256
+  epochs: 20
+  lr: 5.0e-4
+  weight_decay: 1.0e-4
+  num_workers: 0
+
+  use_uncertainty_weight: true
+  lambda_cos: 0.1
+#  lambda_tv: 0.08
+#  lambda_tv_rot: 0.05
+  lambda_tv: 0
+  lambda_tv_rot: 0
+
+  grad_clip_norm: 0.8
+  ema_decay: 0.999
+
+
+scales:
+  rot_scale_rad: 0.35
+
+
+infer:
+  steps: 20
+  n_samples: 1
+  alpha: 0.2
+
+flow_train:
+  lambda_flow: 1.0
+
+#tensorboard --logdir=runs
