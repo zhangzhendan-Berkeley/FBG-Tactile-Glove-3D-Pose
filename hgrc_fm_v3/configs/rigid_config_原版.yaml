@@ -1,0 +1,77 @@
+seed: 0
+device: auto
+
+data:
+  # 训练/测试文件
+  train_files:
+    - {file: data/sub1_data1.txt, subject_id: 0}
+    - {file: data/sub1_data2.txt, subject_id: 0}
+    - {file: data/sub1_test1.txt, subject_id: 0}
+  test_files:
+    - {file: data/sub1_test1.txt, subject_id: 0}
+
+  schema_file: configs/rigid_schema.yaml
+  pos_unit: mm
+  stats_path: runs/pos_stats_mm.yaml
+
+  # 滑窗
+  window_size: 96
+  window_stride: 1
+
+  # 传感器缩放
+  sensor_scale: 4096.0
+
+  # ★ 监督空间
+  supervision: relative     # world | relative
+  ref_frame: last           # last | center
+  
+  augment:
+    enable: true             # 也可以不写，直接通过是否传入 augment 来控制
+    sensor_noise_std: 0.02
+    sensor_mask_prob: 0.05
+    sensor_mask_mode: zero   # zero | half
+    back_pos_jitter_mm: 2.0
+    back_rot_jitter_deg: 1.0
+
+
+model:
+  enc_type: mamba           # gru | tcn | tfm | mamba
+  seq_hidden: 384
+  seq_layers: 6
+  pooling: mean
+
+  mamba_d_state: 32
+  mamba_d_conv: 4
+  mamba_expand: 3
+  mamba_dropout: 0.03
+
+  head_hidden: 768
+  head_depth: 6
+  head_act: silu
+
+  flow_width: 512
+  flow_depth: 6
+  flow_tfeat: 16
+  flow_act: silu
+
+train:
+  batch_size: 128
+  epochs: 150
+  lr: 5.0e-4
+  weight_decay: 1.0e-4
+  num_workers: 4
+
+  use_uncertainty_weight: true
+  lambda_cos: 0.1          # 方向余弦先验
+  lambda_tv: 0.08          # 时间平滑（位置）
+  lambda_tv_rot: 0.05       # 时间平滑（旋转）
+
+  grad_clip_norm: 0.8
+  ema_decay: 0.999          # 0 关闭；0.999/0.9995 常用
+
+scales:
+  rot_scale_rad: 0.35     # 10°
+
+infer:
+  steps: 120
+  n_samples: 6

@@ -1,0 +1,69 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+*.egg-info/
+
+# IDE files
+.idea/
+.vscode/
+
+# Training data, checkpoints, and generated outputs
+data/
+runs/
+**/data/
+**/runs/
+**/calibration_results/
+**/best_model.pt
+*.pt
+*.pth
+*.ckpt
+*.pkl
+*.npy
+*.npz
+
+# Raw/processed experiment files that may contain large or private data
+*.csv
+*.txt
+!requirements.txt
+*.xlsx
+*.xls
+*.mat
+
+# Generated figures and temporary plot/build files
+*.pdf
+*.eps
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.tex
+*.aux
+*.log
+*.out
+*.synctex.gz
+metrics.json
+
+# Binary SDK/runtime files
+*.dll
+*.exe
+
+# Paper/review material and unrelated archives
+A_Fingertip_Pose_Reconstruction_Method_Based_on_Fiber_Optic_Bending_Sensing/
+response/
+Manuscript_ver02/
+Manuscript_ver02.zip
+IEEE-Transactions-LaTeX2e-templates-and-instructions (2)/
+IEEE-Transactions-LaTeX2e-templates-and-instructions (2).zip
+本科毕业论文_基于光纤弯曲传感的手指末端位姿重建方法研究/
+大修.docx
+hgrc_fm_v3_原版/
